@@ -2,10 +2,21 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Check, Info, Eye, X } from 'lucide-react';
+import Link from 'next/link';
+import { Check, Info, Eye, X, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { FEATURE_MODULES, type FeatureModule } from '@/lib/hisab-data';
 import { PRODUCT_SCREENS, type ProductScreen } from '@/lib/product-screens';
+import { trackEvent } from '@/lib/analytics';
+
+const FEATURE_ROUTE_MAP: Record<string, string> = {
+  'sales-invoice': '/features/business-dashboard',
+  'delivery-challan': '/features/delivery-challan-management',
+  'inventory-stock': '/features/inventory-management',
+  'custom-pricing': '/features/custom-pricing',
+  'payments-accounting': '/features/ageing-reports',
+  'reports-gst': '/features/gst-reporting',
+};
 
 type FilterTab = 'all' | 'sales' | 'inventory' | 'purchases' | 'accounting';
 
@@ -102,7 +113,13 @@ export default function FeatureExplorer() {
                         <button
                           key={screen.id}
                           type="button"
-                          onClick={() => setPreviewScreen(screen)}
+                          onClick={() => {
+                            trackEvent('feature_screen_preview', {
+                              location: 'feature_explorer',
+                              label: screen.id,
+                            });
+                            setPreviewScreen(screen);
+                          }}
                           className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 underline decoration-emerald-700/30 underline-offset-4 transition-colors hover:text-emerald-800 hover:decoration-emerald-800 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 rounded"
                         >
                           <Eye className="h-3.5 w-3.5" />
@@ -137,8 +154,8 @@ export default function FeatureExplorer() {
                 </ul>
               </div>
 
-              {(mod.callout || mod.footnote) && (
-                <div className="mt-6 border-t border-slate-100 pt-4">
+              {(mod.callout || mod.footnote || FEATURE_ROUTE_MAP[mod.id]) && (
+                <div className="mt-6 space-y-2 border-t border-slate-100 pt-4">
                   {mod.callout && (
                     <p className="text-sm font-semibold text-[#0F172A]">
                       {mod.callout}
@@ -149,6 +166,15 @@ export default function FeatureExplorer() {
                       <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-slate-400" />
                       <span>{mod.footnote}</span>
                     </p>
+                  )}
+                  {FEATURE_ROUTE_MAP[mod.id] && (
+                    <Link
+                      href={FEATURE_ROUTE_MAP[mod.id]}
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 hover:text-emerald-800"
+                    >
+                      <span>Explore detailed workflow &amp; FAQs</span>
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
                   )}
                 </div>
               )}

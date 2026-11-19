@@ -9,6 +9,7 @@ import {
   buildWhatsAppMessage,
   buildWhatsAppUrl,
 } from '@/lib/whatsapp';
+import { trackEvent } from '@/lib/analytics';
 
 export default function PricingWhatsAppBox() {
   const [contactName, setContactName] = useState('');
@@ -23,6 +24,10 @@ export default function PricingWhatsAppBox() {
   const handleCopyMessage = async () => {
     try {
       await navigator.clipboard.writeText(previewMessage);
+      trackEvent('pricing_message_copy', {
+        location: 'pricing_box',
+        label: 'copy_whatsapp_text',
+      });
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
     } catch {
@@ -158,6 +163,13 @@ export default function PricingWhatsAppBox() {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() =>
+              trackEvent('whatsapp_cta_click', {
+                location: 'pricing_box',
+                label: 'pricing_get_hisabsarthi_4999',
+                value: 4999,
+              })
+            }
             className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#059669] px-5 py-3.5 text-sm font-bold text-white transition-colors duration-150 hover:bg-[#047857] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0F172A]"
           >
             <MessageCircle className="h-4 w-4 shrink-0" />
@@ -168,6 +180,12 @@ export default function PricingWhatsAppBox() {
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
             <a
               href={buildCallUrl()}
+              onClick={() =>
+                trackEvent('phone_call_click', {
+                  location: 'pricing_box',
+                  label: 'pricing_call',
+                })
+              }
               className="flex items-center justify-center gap-2 rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-2.5 text-xs font-semibold text-white transition-colors hover:border-emerald-500/60 hover:bg-slate-800 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
             >
               <Phone className="h-3.5 w-3.5 shrink-0 text-emerald-400" />

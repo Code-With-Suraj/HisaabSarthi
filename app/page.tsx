@@ -1,7 +1,8 @@
-import Image from 'next/image';
+import Link from 'next/link';
 import {
   Check,
   ArrowUpRight,
+  ArrowRight,
   Play,
   MessageCircle,
   ShieldCheck,
@@ -9,6 +10,7 @@ import {
   Lock,
   Layers,
   Phone,
+  BookOpen,
 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import HeroProductShowcase from '@/components/HeroProductShowcase';
@@ -17,6 +19,9 @@ import DashboardSimulator from '@/components/DashboardSimulator';
 import PricingWhatsAppBox from '@/components/PricingWhatsAppBox';
 import FaqAccordion from '@/components/FaqAccordion';
 import ResilientImage from '@/components/ResilientImage';
+import SiteFooter from '@/components/SiteFooter';
+import JsonLd from '@/components/JsonLd';
+import TrackedLink from '@/components/TrackedLink';
 import {
   PAIN_POINTS,
   INTRO_CAPABILITIES,
@@ -24,7 +29,13 @@ import {
   DATA_OWNERSHIP_POINTS,
   TARGET_BUSINESSES,
   COMPARISON_ROWS,
+  FAQ_ITEMS,
 } from '@/lib/hisab-data';
+import { SOLUTION_PAGES, GUIDE_ARTICLES } from '@/lib/seo-pages-data';
+import {
+  buildSoftwareApplicationSchema,
+  buildFaqSchema,
+} from '@/lib/seo';
 import { WHATSAPP_CONFIG, buildCallUrl, buildWhatsAppUrl } from '@/lib/whatsapp';
 import distributorOfficeImg from '@/src/assets/images/indian_distributor_office_1795002294469.jpg';
 import teamOnboardingImg from '@/src/assets/images/team_onboarding_setup_1795002294768.jpg';
@@ -36,6 +47,12 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-[#FAF9F6] text-[#0F172A]">
+      <JsonLd
+        data={[
+          buildSoftwareApplicationSchema(),
+          buildFaqSchema(FAQ_ITEMS),
+        ]}
+      />
       <Navbar />
 
       <main>
@@ -103,33 +120,42 @@ export default function HomePage() {
 
                 {/* Primary & Secondary Purchase Actions */}
                 <div className="mt-5 space-y-2.5">
-                  <a
+                  <TrackedLink
                     href={buyNowUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    eventName="whatsapp_cta_click"
+                    eventLocation="hero"
+                    eventLabel="hero_get_hisabsarthi"
                     className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#059669] px-5 py-3.5 text-sm font-bold text-white transition-colors duration-150 hover:bg-[#047857] whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2"
                   >
                     <MessageCircle className="h-4 w-4 shrink-0" />
                     <span>GET HISABSARTHI NOW</span>
                     <ArrowUpRight className="h-4 w-4 shrink-0" />
-                  </a>
+                  </TrackedLink>
 
                   <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-                    <a
+                    <TrackedLink
                       href="#live-demo"
+                      eventName="demo_interaction"
+                      eventLocation="hero"
+                      eventLabel="hero_watch_live_demo"
                       className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-xs font-semibold text-[#0F172A] transition-colors duration-150 hover:border-slate-400 hover:bg-slate-50 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
                     >
                       <Play className="h-3.5 w-3.5 shrink-0 text-emerald-700" />
                       <span>Watch Live Demo</span>
-                    </a>
+                    </TrackedLink>
 
-                    <a
+                    <TrackedLink
                       href={callUrl}
+                      eventName="phone_call_click"
+                      eventLocation="hero"
+                      eventLabel="hero_direct_call"
                       className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-xs font-semibold text-[#0F172A] transition-colors duration-150 hover:border-slate-400 hover:bg-slate-50 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
                     >
                       <Phone className="h-3.5 w-3.5 shrink-0 text-emerald-700" />
                       <span className="font-mono-num">{WHATSAPP_CONFIG.displayPhone}</span>
-                    </a>
+                    </TrackedLink>
                   </div>
                 </div>
 
@@ -319,6 +345,13 @@ export default function HomePage() {
                     <p className="mt-1 text-sm text-slate-600">
                       You focus on your business. We handle the initial setup.
                     </p>
+                    <Link
+                      href="/how-it-works"
+                      className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 hover:text-emerald-800"
+                    >
+                      <span>View Complete Onboarding Guide</span>
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -371,6 +404,13 @@ export default function HomePage() {
                   <p className="mt-5 font-display text-base font-bold text-[#0F172A]">
                     Your Google account. Your business database. Your control.
                   </p>
+                  <Link
+                    href="/security"
+                    className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 hover:text-emerald-800"
+                  >
+                    <span>Read Data Ownership &amp; Security Architecture</span>
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
                 </div>
 
                 <div className="lg:col-span-7">
@@ -403,7 +443,7 @@ export default function HomePage() {
         </section>
 
         {/* SECTION 8 – WHO SHOULD USE HISABSARTHI? */}
-        <section className="border-b border-slate-200/80 bg-white py-16 sm:py-20">
+        <section id="who-uses" className="border-b border-slate-200/80 bg-white py-16 sm:py-20">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-stretch">
               <div className="lg:col-span-5">
@@ -441,6 +481,19 @@ export default function HomePage() {
                 <p className="mt-6 text-sm leading-relaxed text-slate-600">
                   If your business manages sales, purchases, inventory, customers and payments, HisabSarthi can help bring those operations together.
                 </p>
+
+                <div className="mt-5 flex flex-wrap items-center gap-4 border-t border-slate-200 pt-4 text-xs">
+                  {SOLUTION_PAGES.map((sol) => (
+                    <Link
+                      key={sol.slug}
+                      href={`/solutions/${sol.slug}`}
+                      className="inline-flex items-center gap-1 font-semibold text-emerald-700 hover:text-emerald-800 hover:underline underline-offset-4"
+                    >
+                      <span>{sol.title}</span>
+                      <ArrowRight className="h-3 w-3" />
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -529,6 +582,63 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* SECTION 11.5 – PRACTICAL GUIDES & AEO KNOWLEDGE HUB */}
+        <section className="border-b border-slate-200/80 bg-white py-16 sm:py-20">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+              <div className="max-w-2xl">
+                <p className="text-xs font-semibold tracking-wide text-emerald-700">
+                  Practical Accounting &amp; Google Sheets Guides
+                </p>
+                <h2 className="mt-2 font-display text-2xl font-bold tracking-tight text-[#0F172A] sm:text-3xl">
+                  Learn How Automated Business Reporting Works
+                </h2>
+              </div>
+              <Link
+                href="/guides"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-emerald-700 hover:text-emerald-800 whitespace-nowrap shrink-0"
+              >
+                <BookOpen className="h-4 w-4" />
+                <span>View All Guides</span>
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+              {GUIDE_ARTICLES.slice(0, 3).map((guide) => (
+                <article
+                  key={guide.slug}
+                  className="flex flex-col justify-between rounded-xl border border-slate-200 bg-[#FAF9F6] p-6 transition-colors hover:border-slate-300"
+                >
+                  <div>
+                    <p className="text-xs font-semibold text-emerald-700">
+                      {guide.category} · {guide.readingTime}
+                    </p>
+                    <h3 className="mt-2 font-display text-base font-bold text-[#0F172A]">
+                      <Link
+                        href={`/guides/${guide.slug}`}
+                        className="hover:text-emerald-800 transition-colors"
+                      >
+                        {guide.title}
+                      </Link>
+                    </h3>
+                    <p className="mt-2 text-xs leading-relaxed text-slate-600 line-clamp-3">
+                      {guide.directAnswer}
+                    </p>
+                  </div>
+                  <Link
+                    href={`/guides/${guide.slug}`}
+                    className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#0F172A] hover:text-emerald-700"
+                  >
+                    <span>Read Guide</span>
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* SECTION 12 – FINAL CTA */}
         <section className="bg-[#0F172A] py-16 text-white sm:py-20">
           <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
@@ -559,100 +669,52 @@ export default function HomePage() {
               </p>
 
               <div className="mt-7 flex flex-wrap items-center justify-center gap-4">
-                <a
+                <TrackedLink
                   href={buyNowUrl}
                   target="_blank"
                   rel="noopener noreferrer"
+                  eventName="whatsapp_cta_click"
+                  eventLocation="final_cta"
+                  eventLabel="final_buy_now_4999"
                   className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#059669] px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-[#047857] whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
                 >
                   <span>BUY NOW – ₹4,999</span>
                   <ArrowUpRight className="h-4 w-4" />
-                </a>
+                </TrackedLink>
 
-                <a
+                <TrackedLink
                   href={talkTeamUrl}
                   target="_blank"
                   rel="noopener noreferrer"
+                  eventName="whatsapp_cta_click"
+                  eventLocation="final_cta"
+                  eventLabel="final_talk_whatsapp"
                   className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700 bg-slate-800 px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:border-slate-500 hover:bg-slate-700 whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
                 >
                   <MessageCircle className="h-4 w-4 text-emerald-400" />
                   <span>TALK TO OUR TEAM ON WHATSAPP</span>
-                </a>
+                </TrackedLink>
               </div>
 
               <div className="mt-5 flex items-center justify-center gap-2 text-xs text-slate-400">
                 <span>Call or WhatsApp Suraj Automation:</span>
-                <a
+                <TrackedLink
                   href={callUrl}
+                  eventName="phone_call_click"
+                  eventLocation="final_cta"
+                  eventLabel="final_cta_call"
                   className="inline-flex items-center gap-1.5 font-mono-num font-semibold text-white underline decoration-slate-600 underline-offset-4 transition-colors hover:text-emerald-400 hover:decoration-emerald-400"
                 >
                   <Phone className="h-3.5 w-3.5 text-emerald-400" />
                   <span>{WHATSAPP_CONFIG.displayPhone}</span>
-                </a>
+                </TrackedLink>
               </div>
             </div>
           </div>
         </section>
       </main>
 
-      {/* Quiet Footer */}
-      <footer className="border-t border-slate-800 bg-[#0B1120] py-10 text-slate-400">
-        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-4 sm:flex-row sm:items-center sm:px-6 lg:px-8">
-          <div className="flex flex-col items-start gap-2">
-            <a
-              href="#"
-              aria-label="HisabSarthi Home"
-              className="inline-flex overflow-hidden rounded-lg border border-white/10"
-            >
-              <Image
-                src="/assets/aistudio/image_b899084e.png"
-                alt="HisabSarthi — Smart Accounting"
-                width={148}
-                height={44}
-                referrerPolicy="no-referrer"
-                className="h-9 w-auto block"
-              />
-            </a>
-            <p className="text-xs text-slate-400">
-              By <span className="font-medium text-slate-200">Suraj Automation</span> ·{' '}
-              <span className="italic">Smart Accounting. Better Business Control.</span>
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-6 text-xs">
-            <a href="#features" className="hover:text-white transition-colors">
-              Features
-            </a>
-            <a href="#live-demo" className="hover:text-white transition-colors">
-              Live Demo
-            </a>
-            <a href="#setup" className="hover:text-white transition-colors">
-              Setup Journey
-            </a>
-            <a href="#pricing" className="hover:text-white transition-colors">
-              Pricing
-            </a>
-            <a href="#faq" className="hover:text-white transition-colors">
-              FAQ
-            </a>
-            <a
-              href={callUrl}
-              className="inline-flex items-center gap-1.5 font-mono-num font-medium text-slate-200 hover:text-white transition-colors"
-            >
-              <Phone className="h-3.5 w-3.5 text-emerald-400" />
-              <span>{WHATSAPP_CONFIG.displayPhone}</span>
-            </a>
-            <a
-              href={talkTeamUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors"
-            >
-              WhatsApp Support
-            </a>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

@@ -24,6 +24,7 @@ import {
   type DemoChallan,
   type DemoInvoice,
 } from '@/lib/hisab-data';
+import { trackEvent } from '@/lib/analytics';
 
 type SimulatorTab = 'overview' | 'challans' | 'inventory' | 'reports';
 type InvoiceStatusFilter = 'All' | 'Paid' | 'Pending' | 'Overdue';
@@ -245,6 +246,10 @@ export default function DashboardSimulator() {
     };
     setInvoices((prev) => [newDemoInvoice, ...prev]);
     setSelectedInvoiceId(newInvoiceNo);
+    trackEvent('demo_interaction', {
+      location: 'dashboard_simulator',
+      label: 'generate_consolidated_invoice',
+    });
   };
 
   const handleResetChallans = () => {
@@ -334,7 +339,13 @@ export default function DashboardSimulator() {
                 type="button"
                 role="tab"
                 aria-selected={isActive}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() => {
+                  setActiveTab(tab.id);
+                  trackEvent('demo_interaction', {
+                    location: 'dashboard_simulator',
+                    label: `tab_${tab.id}`,
+                  });
+                }}
                 className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-semibold transition-colors duration-150 whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 ${
                   isActive
                     ? 'bg-[#0F172A] text-white'

@@ -1,6 +1,14 @@
 import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans, DM_Sans, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
+import AnalyticsScripts from '@/components/AnalyticsScripts';
+import JsonLd from '@/components/JsonLd';
+import {
+  SITE_CONFIG,
+  getSiteUrl,
+  buildOrganizationSchema,
+  buildWebsiteSchema,
+} from '@/lib/seo';
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -23,24 +31,72 @@ const jetbrainsMono = JetBrains_Mono({
   display: 'swap',
 });
 
+const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?.trim();
+const bingVerification = process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION?.trim();
+
 export const metadata: Metadata = {
-  title: 'HisabSarthi by Suraj Automation — Smart Accounting & Inventory Software',
+  metadataBase: new URL(getSiteUrl()),
+  title: {
+    default: 'HisabSarthi — Smart Accounting & Inventory Software',
+    template: '%s',
+  },
   description:
-    'Manage Sales, Delivery Challans, Consolidated Invoices, Purchases, Inventory, Custom Pricing, and GST Reports in one place. ₹4,999 one-time lifetime access with free professional setup.',
+    'Manage sales invoices, delivery challans, inventory, custom pricing, party ledgers, ageing & GST reports in Google Sheets. ₹4,999 lifetime access.',
+  applicationName: SITE_CONFIG.brandName,
+  authors: [{ name: SITE_CONFIG.parentCompany, url: getSiteUrl() }],
+  creator: SITE_CONFIG.parentCompany,
+  publisher: SITE_CONFIG.parentCompany,
+  alternates: {
+    canonical: '/',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
+  ...(googleVerification || bingVerification
+    ? {
+        verification: {
+          ...(googleVerification ? { google: googleVerification } : {}),
+          ...(bingVerification
+            ? { other: { 'msvalidate.01': bingVerification } }
+            : {}),
+        },
+      }
+    : {}),
   icons: {
-    icon: '/assets/aistudio/image_b899084e.png',
+    icon: SITE_CONFIG.logoPath,
+    apple: SITE_CONFIG.logoPath,
   },
   openGraph: {
-    title: 'HisabSarthi by Suraj Automation — ₹4,999 Lifetime Access',
-    description:
-      'Smart Accounting & Inventory Management Software for Growing Businesses. Free professional setup by Suraj Automation Team.',
     type: 'website',
+    locale: 'en_IN',
+    url: getSiteUrl(),
+    siteName: SITE_CONFIG.brandName,
+    title: 'HisabSarthi — Smart Accounting & Inventory Software',
+    description:
+      'Google Sheets-powered accounting, delivery challans, consolidated invoicing, inventory & GST summaries for ₹4,999 one-time with free team setup.',
+    images: [
+      {
+        url: SITE_CONFIG.ogImagePath,
+        width: 1366,
+        height: 641,
+        alt: 'HisabSarthi Smart Accounting & Business Reporting Dashboard',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'HisabSarthi by Suraj Automation — ₹4,999 Lifetime Access',
+    title: 'HisabSarthi — Smart Accounting & Inventory Software',
     description:
-      'Smart Accounting & Inventory Management Software for Growing Businesses. One-time payment, zero monthly subscription.',
+      'Smart accounting, delivery challans, inventory & GST summaries in your own Google Drive. ₹4,999 lifetime access with free setup.',
+    images: [SITE_CONFIG.ogImagePath],
   },
 };
 
@@ -51,14 +107,16 @@ export default function RootLayout({
 }) {
   return (
     <html
-      lang="en"
+      lang="en-IN"
       className={`${plusJakarta.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}
     >
       <body
         suppressHydrationWarning
         className="min-h-screen bg-[#FAF9F6] text-[#0F172A] antialiased selection:bg-emerald-100 selection:text-emerald-950"
       >
+        <JsonLd data={[buildOrganizationSchema(), buildWebsiteSchema()]} />
         {children}
+        <AnalyticsScripts />
       </body>
     </html>
   );
