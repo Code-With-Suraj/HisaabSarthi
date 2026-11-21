@@ -17,17 +17,19 @@ export default function SiteFooter() {
           <div className="lg:col-span-4">
             <Link
               href="/"
-              aria-label="HisabSarthi Home"
-              className="inline-flex overflow-hidden rounded-lg border border-white/10"
+              aria-label="HisabSarthi — Simple Hisab, Smart Business"
+              className="inline-flex items-center rounded-xl bg-white px-3 py-1.5 shadow-sm ring-1 ring-white/15 transition-opacity hover:opacity-95"
             >
-              <Image
-                src="/assets/aistudio/image_b899084e.png"
-                alt="HisabSarthi — Smart Accounting"
-                width={148}
-                height={44}
-                referrerPolicy="no-referrer"
-                className="h-9 w-auto block"
-              />
+              <span className="relative block h-10 w-[118px] overflow-hidden">
+                <Image
+                  src="/assets/aistudio/HisabSarthi_Growth_Accounting_Logo_ec3c4863.png"
+                  alt="HisabSarthi — Simple Hisab, Smart Business"
+                  width={1536}
+                  height={1024}
+                  referrerPolicy="no-referrer"
+                  className="h-full w-full object-cover object-[50%_40%]"
+                />
+              </span>
             </Link>
             <p className="mt-3 text-xs leading-relaxed text-slate-400">
               Smart accounting, inventory, delivery challan, ageing, and GST summary reporting software built on Google Sheets and Google Apps Script by{' '}

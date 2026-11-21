@@ -25,17 +25,17 @@ export default function Navbar() {
         {/* Zone 1: Single-element Brand Lockup */}
         <Link
           href="/"
-          aria-label="HisabSarthi Home"
-          className="inline-flex items-center shrink-0 rounded-lg overflow-hidden ring-1 ring-slate-900/10 shadow-xs transition-opacity duration-150 hover:opacity-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2"
+          aria-label="HisabSarthi — Simple Hisab, Smart Business"
+          className="relative inline-flex h-11 w-[128px] sm:h-12 sm:w-[140px] shrink-0 items-center overflow-hidden rounded-md transition-opacity duration-150 hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2"
         >
           <Image
-            src="/assets/aistudio/image_b899084e.png"
-            alt="HisabSarthi — Smart Accounting"
-            width={148}
-            height={44}
+            src="/assets/aistudio/HisabSarthi_Growth_Accounting_Logo_ec3c4863.png"
+            alt="HisabSarthi — Simple Hisab, Smart Business"
+            width={1536}
+            height={1024}
             priority
             referrerPolicy="no-referrer"
-            className="h-9 w-auto sm:h-10 block"
+            className="h-full w-full object-cover object-[50%_40%] mix-blend-multiply"
           />
         </Link>
 

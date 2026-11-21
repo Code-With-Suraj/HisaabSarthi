@@ -12,7 +12,7 @@ export const SITE_CONFIG = {
   whatsappUrl: `https://wa.me/${WHATSAPP_CONFIG.number}`,
   priceInr: '4999',
   currency: 'INR',
-  logoPath: '/assets/aistudio/image_b899084e.png',
+  logoPath: '/assets/aistudio/HisabSarthi_Growth_Accounting_Logo_ec3c4863.png',
   ogImagePath: '/assets/aistudio/HisaabSarthi_96f9e8f2.PNG',
   location: {
     city: 'Noida',
@@ -109,8 +109,8 @@ export function buildOrganizationSchema() {
     logo: {
       '@type': 'ImageObject',
       url: absoluteUrl(SITE_CONFIG.logoPath),
-      width: 148,
-      height: 44,
+      width: 1536,
+      height: 1024,
     },
     contactPoint: [
       {

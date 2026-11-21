@@ -304,14 +304,14 @@ export default function DashboardSimulator() {
       {/* Simulator Top Chrome */}
       <div className="flex flex-col gap-4 border-b border-slate-200 bg-[#F4F2EC]/70 px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex items-center gap-3.5">
-          <div className="shrink-0 overflow-hidden rounded-lg ring-1 ring-slate-900/10">
+          <div className="relative h-10 w-[116px] shrink-0 overflow-hidden">
             <Image
-              src="/assets/aistudio/image_b899084e.png"
-              alt="HisabSarthi"
-              width={148}
-              height={44}
+              src="/assets/aistudio/HisabSarthi_Growth_Accounting_Logo_ec3c4863.png"
+              alt="HisabSarthi — Simple Hisab, Smart Business"
+              width={1536}
+              height={1024}
               referrerPolicy="no-referrer"
-              className="h-8 w-auto block"
+              className="h-full w-full object-cover object-[50%_40%] mix-blend-multiply"
             />
           </div>
           <div>
