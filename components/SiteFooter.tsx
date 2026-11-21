@@ -1,8 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Phone, MessageCircle } from 'lucide-react';
+import { Phone, MessageCircle, Play, ArrowUpRight } from 'lucide-react';
 import TrackedLink from '@/components/TrackedLink';
-import { WHATSAPP_CONFIG, buildCallUrl, buildWhatsAppUrl } from '@/lib/whatsapp';
+import {
+  LIVE_DEMO_URL,
+  WHATSAPP_CONFIG,
+  buildCallUrl,
+  buildWhatsAppUrl,
+} from '@/lib/whatsapp';
 import { FEATURE_PAGES, SOLUTION_PAGES, GUIDE_ARTICLES } from '@/lib/seo-pages-data';
 
 export default function SiteFooter() {
@@ -57,6 +62,19 @@ export default function SiteFooter() {
               >
                 <MessageCircle className="h-3.5 w-3.5" />
                 <span>WhatsApp Support &amp; Setup Confirmation</span>
+              </TrackedLink>
+              <TrackedLink
+                href={LIVE_DEMO_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                eventName="demo_interaction"
+                eventLocation="footer"
+                eventLabel="footer_live_demo"
+                className="inline-flex items-center gap-2 font-medium text-slate-200 transition-colors hover:text-white"
+              >
+                <Play className="h-3.5 w-3.5 text-emerald-400" />
+                <span>Launch Live Demo App</span>
+                <ArrowUpRight className="h-3.5 w-3.5 text-slate-400" />
               </TrackedLink>
             </div>
           </div>

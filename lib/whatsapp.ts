@@ -1,4 +1,7 @@
-// Centralized WhatsApp & Call contact configuration for Suraj Automation Team.
+// Centralized WhatsApp, Call & Live Demo links for HisabSarthi by Suraj Automation Team.
+export const LIVE_DEMO_URL =
+  'https://script.google.com/macros/s/AKfycbzChXbL9oAIa4L6NZ8b_N0tYXCAypUjZIV_jTDbyM78s3qivp_ZGOoVj08aQyzU6dTr8Q/exec';
+
 export const WHATSAPP_CONFIG = {
   number: '919355337839',
   rawPhone: '9355337839',

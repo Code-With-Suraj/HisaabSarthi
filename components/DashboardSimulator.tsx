@@ -13,7 +13,9 @@ import {
   RotateCcw,
   AlertTriangle,
   ArrowRight,
+  ArrowUpRight,
   Info,
+  Landmark,
 } from 'lucide-react';
 import {
   DEMO_RECENT_INVOICES,
@@ -25,8 +27,10 @@ import {
   type DemoInvoice,
 } from '@/lib/hisab-data';
 import { trackEvent } from '@/lib/analytics';
+import { LIVE_DEMO_URL } from '@/lib/whatsapp';
+import BrsWorkspaceDemo from '@/components/BrsWorkspaceDemo';
 
-type SimulatorTab = 'overview' | 'challans' | 'inventory' | 'reports';
+type SimulatorTab = 'overview' | 'challans' | 'inventory' | 'reports' | 'brs';
 type InvoiceStatusFilter = 'All' | 'Paid' | 'Pending' | 'Overdue';
 type StockFilter = 'All' | 'Low Stock' | 'Out of Stock';
 type PricingProfile = 'default' | 'ganesh-andheri' | 'annapurna-bkc';
@@ -294,9 +298,10 @@ export default function DashboardSimulator() {
 
   const tabs: { id: SimulatorTab; label: string; icon: typeof BarChart3 }[] = [
     { id: 'overview', label: 'Business Overview', icon: BarChart3 },
-    { id: 'challans', label: 'Challan → Consolidated Invoice', icon: Truck },
-    { id: 'inventory', label: 'Inventory & Custom Pricing', icon: Package },
-    { id: 'reports', label: 'GST & Ageing Reports', icon: FileText },
+    { id: 'challans', label: 'Challan → Consolidated', icon: Truck },
+    { id: 'inventory', label: 'Inventory & Pricing', icon: Package },
+    { id: 'reports', label: 'GST & Ageing', icon: FileText },
+    { id: 'brs', label: 'Multi-Bank & BRS', icon: Landmark },
   ];
 
   return (
@@ -316,11 +321,28 @@ export default function DashboardSimulator() {
           </div>
           <div>
             <p className="text-xs font-semibold tracking-wide text-emerald-700">
-              Interactive Product Demo · Sample Trading Business Data
+              Interactive Preview · Sample Trading Business Data
             </p>
-            <p className="mt-0.5 font-display text-sm font-semibold text-[#0F172A]">
-              Workspace Simulator
-            </p>
+            <div className="mt-0.5 flex flex-wrap items-center gap-x-3 gap-y-1">
+              <p className="font-display text-sm font-semibold text-[#0F172A]">
+                Workspace Simulator
+              </p>
+              <a
+                href={LIVE_DEMO_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  trackEvent('demo_interaction', {
+                    location: 'dashboard_simulator',
+                    label: 'simulator_open_real_app',
+                  })
+                }
+                className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 underline decoration-emerald-700/30 underline-offset-4 transition-colors hover:text-emerald-800 hover:decoration-emerald-800 whitespace-nowrap"
+              >
+                <span>Open Real Web App</span>
+                <ArrowUpRight className="h-3.5 w-3.5" />
+              </a>
+            </div>
           </div>
         </div>
 
@@ -1194,6 +1216,13 @@ export default function DashboardSimulator() {
               </p>
             </div>
           )}
+        </div>
+      )}
+
+      {/* TAB 5: MULTI-BANK & SMART BRS */}
+      {activeTab === 'brs' && (
+        <div className="p-4 sm:p-6 lg:p-8">
+          <BrsWorkspaceDemo />
         </div>
       )}
       </motion.div>

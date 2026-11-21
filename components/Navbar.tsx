@@ -4,12 +4,17 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Menu, X, ArrowUpRight, Phone } from 'lucide-react';
-import { WHATSAPP_CONFIG, buildCallUrl, buildWhatsAppUrl } from '@/lib/whatsapp';
+import {
+  LIVE_DEMO_URL,
+  WHATSAPP_CONFIG,
+  buildCallUrl,
+  buildWhatsAppUrl,
+} from '@/lib/whatsapp';
 import { trackEvent } from '@/lib/analytics';
 
-const NAV_LINKS = [
+const NAV_LINKS: { label: string; href: string; external?: boolean }[] = [
   { label: 'Features', href: '/#features' },
-  { label: 'Live Demo', href: '/#live-demo' },
+  { label: 'Live Demo', href: LIVE_DEMO_URL, external: true },
   { label: 'Setup', href: '/how-it-works' },
   { label: 'Guides', href: '/guides' },
   { label: 'Pricing', href: '/#pricing' },
@@ -44,15 +49,34 @@ export default function Navbar() {
           aria-label="Primary navigation"
           className="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600"
         >
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="whitespace-nowrap shrink-0 transition-colors duration-150 hover:text-[#0F172A] hover:underline hover:underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 rounded"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {NAV_LINKS.map((link) =>
+            link.external ? (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  trackEvent('demo_interaction', {
+                    location: 'navbar',
+                    label: 'navbar_live_demo',
+                  })
+                }
+                className="inline-flex items-center gap-1 whitespace-nowrap shrink-0 font-semibold text-emerald-700 transition-colors duration-150 hover:text-emerald-800 hover:underline hover:underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 rounded"
+              >
+                <span>{link.label}</span>
+                <ArrowUpRight className="h-3.5 w-3.5" />
+              </a>
+            ) : (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="whitespace-nowrap shrink-0 transition-colors duration-150 hover:text-[#0F172A] hover:underline hover:underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 rounded"
+              >
+                {link.label}
+              </Link>
+            )
+          )}
         </nav>
 
         {/* Zone 3: Single Primary Action */}
@@ -89,16 +113,36 @@ export default function Navbar() {
       {mobileOpen && (
         <div className="border-t border-slate-200 bg-white px-4 py-4 md:hidden">
           <nav aria-label="Mobile navigation" className="flex flex-col gap-2">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="rounded-lg px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-[#0F172A]"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {NAV_LINKS.map((link) =>
+              link.external ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => {
+                    trackEvent('demo_interaction', {
+                      location: 'mobile_nav',
+                      label: 'mobile_live_demo',
+                    });
+                    setMobileOpen(false);
+                  }}
+                  className="inline-flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-semibold text-emerald-700 hover:bg-emerald-50"
+                >
+                  <span>{link.label}</span>
+                  <ArrowUpRight className="h-4 w-4" />
+                </a>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="rounded-lg px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-[#0F172A]"
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
             <Link
               href="/security"
               onClick={() => setMobileOpen(false)}

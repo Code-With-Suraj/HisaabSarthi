@@ -537,6 +537,86 @@ export const FEATURE_PAGES: FeaturePageData[] = [
     relatedSlugs: ['delivery-challan-management', 'inventory-management', 'business-dashboard'],
     relatedGuideSlug: 'multiple-delivery-challans-consolidated-invoice',
   },
+  {
+    slug: 'bank-reconciliation-multi-bank',
+    title: 'Multi-Bank & Smart BRS',
+    seoTitle: 'Multi-Bank & Smart Bank Reconciliation (BRS) Software | HisabSarthi',
+    seoDescription:
+      'Manage multiple business bank accounts, auto-match NetBanking CSV statements, track uncleared cheques, and generate CA-standard BRS reports with ₹0.00 variance.',
+    kicker: 'New Feature · Intelligent Banking & Reconciliation',
+    headline: 'Effortless Bank Reconciliation with Multi-Bank Power.',
+    directAnswer:
+      'HisabSarthi Multi-Bank & Smart Bank Reconciliation (BRS) lets growing businesses manage unlimited Current, Savings, and OD/CC bank accounts, auto-match NetBanking CSV statements by amount, date, and UTR/cheque reference, track uncleared cheques, book quick bank charges or interest on the fly, and print CA-standard BRS reports with Annexures.',
+    screenId: 'dashboard',
+    whoNeedsIt: [
+      'Growing businesses operating multiple Current, Savings, or OD/CC accounts across HDFC, SBI, ICICI, Axis, Kotak, and more',
+      'Accounts teams spending hours manually ticking NetBanking statements against Excel ledgers',
+      'Business owners preparing clean audit-ready BRS statements with uncleared cheque annexures for their Chartered Accountant',
+    ],
+    keyCapabilities: [
+      {
+        title: 'Multi-Bank Account Management',
+        detail:
+          'Configure HDFC, SBI, ICICI, Axis, Kotak, and more with opening balances, IFSC codes, UPI VPAs, and default bank selection.',
+      },
+      {
+        title: 'Live 4-Card Reconciliation Workspace',
+        detail:
+          'Monitor Balance as per Company Books, (+) Cheques Issued Not Yet Presented, (-) Cheques Deposited Not Yet Cleared, and (=) Reconciled Passbook Balance in real time.',
+      },
+      {
+        title: 'Smart Bank Statement CSV Auto-Matcher',
+        detail:
+          'Drop NetBanking CSV statements to auto-match amounts, dates, and UTR/cheque references with confidence scores.',
+      },
+      {
+        title: '1-Click Clearance & Quick Bank Adjustments',
+        detail:
+          'Use instant Clear Today, bulk value-date updates, and inline Quick Bank Adjustments for bank fees or interest credits without leaving BRS.',
+      },
+    ],
+    workflowSteps: [
+      {
+        step: 'Pick Your Bank & Cut-Off Date',
+        detail:
+          'Select your bank account and cut-off date (Today, Month-End, or Custom Period), then enter your statement balance.',
+      },
+      {
+        step: 'Clear & Auto-Match Transactions',
+        detail:
+          'Click Clear Today, batch update clearance dates, or upload your NetBanking CSV for automated matching.',
+      },
+      {
+        step: 'Export Audit-Ready BRS',
+        detail:
+          'Verify your ₹0.00 variance, then print or download a professional PDF/CSV statement complete with Annexures of uncleared cheques.',
+      },
+    ],
+    practicalExample: {
+      scenario:
+        'An accounts operator previously maintained 3 separate Excel workbooks for HDFC Current, SBI CC, and ICICI accounts, manually color-highlighting uncleared cheques each month.',
+      outcome:
+        'With HisabSarthi Smart BRS, switching bank accounts takes one dropdown click, CSV auto-matching reconciles cleared entries in seconds, and CA-ready BRS Annexures print in one click.',
+    },
+    limitations: [
+      'CSV auto-matching depends on downloading standard CSV statements from your bank NetBanking portal and verifying suggested matches before finalizing.',
+      'Bank adjustments and BRS reports support accounting review and audit preparation inside your Google Sheets database.',
+    ],
+    faqs: [
+      {
+        question: 'Can I reconcile multiple bank accounts including OD/CC accounts in HisabSarthi?',
+        answer:
+          'Yes. The Multi-Bank Master supports Current, Savings, and OD/CC accounts with opening balances, IFSC codes, UPI VPAs, and a unified dropdown switcher inside the BRS workspace.',
+      },
+      {
+        question: 'How does the NetBanking CSV Auto-Matcher work?',
+        answer:
+          'Download your bank statement CSV from NetBanking and upload it into HisabSarthi BRS to automatically match entries by amount, date proximity, and UTR/cheque reference with confidence scores.',
+      },
+    ],
+    relatedSlugs: ['ageing-reports', 'business-dashboard', 'gst-reporting'],
+    relatedGuideSlug: 'automated-mis-reporting-google-sheets',
+  },
 ];
 
 export const SOLUTION_PAGES: SolutionPageData[] = [

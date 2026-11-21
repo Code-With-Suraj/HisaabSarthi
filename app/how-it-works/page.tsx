@@ -5,13 +5,19 @@ import Navbar from '@/components/Navbar';
 import SiteFooter from '@/components/SiteFooter';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import SubpageCta from '@/components/SubpageCta';
+import { PosterSpotlightCard } from '@/components/FeatureVisualViewer';
 import JsonLd from '@/components/JsonLd';
 import { SETUP_STEPS, PRICING_INCLUDED } from '@/lib/hisab-data';
+import { FEATURE_POSTERS } from '@/lib/feature-posters';
 import {
   buildPageMetadata,
   buildBreadcrumbSchema,
   buildFaqSchema,
 } from '@/lib/seo';
+
+const SETTINGS_POSTER = FEATURE_POSTERS.find(
+  (p) => p.id === 'business-settings-migration'
+)!;
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'How HisabSarthi Setup Works — 5-Step Guided Onboarding',
@@ -72,31 +78,40 @@ export default function HowItWorksPage() {
             </p>
           </header>
 
-          {/* 5-Step Journey */}
-          <section className="mt-12">
-            <h2 className="font-display text-2xl font-bold tracking-tight text-[#0F172A]">
-              Your 5-Step Onboarding Journey
-            </h2>
-            <ol className="mt-6 space-y-4">
-              {SETUP_STEPS.map((item) => (
-                <li
-                  key={item.step}
-                  className="flex flex-col gap-3 rounded-xl border border-slate-200 bg-white p-6 sm:flex-row sm:items-start sm:gap-5"
-                >
-                  <span className="font-mono-num shrink-0 self-start rounded-lg border border-slate-200 bg-[#FAF9F6] px-3 py-1.5 text-xs font-bold text-emerald-700">
-                    {item.step}
-                  </span>
-                  <div>
-                    <h3 className="font-display text-lg font-semibold text-[#0F172A]">
-                      {item.title}
-                    </h3>
-                    <p className="mt-1.5 text-sm leading-relaxed text-slate-600">
-                      {item.description}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ol>
+          {/* 5-Step Journey + Business Settings & Migration Visual */}
+          <section className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-start">
+            <div className="lg:col-span-7">
+              <h2 className="font-display text-2xl font-bold tracking-tight text-[#0F172A]">
+                Your 5-Step Onboarding Journey
+              </h2>
+              <ol className="mt-6 space-y-4">
+                {SETUP_STEPS.map((item) => (
+                  <li
+                    key={item.step}
+                    className="flex flex-col gap-3 rounded-xl border border-slate-200 bg-white p-5 sm:flex-row sm:items-start sm:gap-4"
+                  >
+                    <span className="font-mono-num shrink-0 self-start rounded-lg border border-slate-200 bg-[#FAF9F6] px-3 py-1.5 text-xs font-bold text-emerald-700">
+                      {item.step}
+                    </span>
+                    <div>
+                      <h3 className="font-display text-base font-semibold text-[#0F172A]">
+                        {item.title}
+                      </h3>
+                      <p className="mt-1 text-sm leading-relaxed text-slate-600">
+                        {item.description}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+
+            <div className="mx-auto w-full max-w-sm lg:sticky lg:top-24 lg:col-span-5 lg:max-w-none">
+              <PosterSpotlightCard poster={SETTINGS_POSTER} />
+              <p className="mt-2.5 text-xs text-slate-500">
+                Configure company profile, bank details, Print A &amp; Print B invoice formats, and import existing masters &amp; transactions.
+              </p>
+            </div>
           </section>
 
           {/* Included Deliverables */}

@@ -75,6 +75,7 @@ export const INTRO_CAPABILITIES: string[] = [
   'Maintain item-wise inventory.',
   'Manage customer-wise custom pricing.',
   'Generate ledgers and ageing reports.',
+  'Reconcile multiple bank accounts with automated BRS.',
   'View GST summaries and business reports.',
 ];
 
@@ -216,6 +217,26 @@ export const FEATURE_MODULES: FeatureModule[] = [
     footnote:
       'GST reports are intended for accounting review and reconciliation. They do not automatically file GST returns.',
   },
+  {
+    id: 'bank-reconciliation',
+    number: '09.',
+    category: 'accounting',
+    title: 'Multi-Bank & Smart Bank Reconciliation (BRS)',
+    description:
+      'Manage multiple bank accounts, auto-match NetBanking CSV statements, track uncleared cheques, and achieve ₹0.00 variance with audit-ready BRS reports.',
+    bullets: [
+      'Multi-Bank Master (Current, Savings, OD/CC)',
+      'IFSC, UPI VPA & default bank tracking',
+      'Live 4-card reconciliation workspace',
+      'Instant ₹0.00 zero-difference variance check',
+      'NetBanking CSV smart auto-matcher',
+      '1-click clearance & bulk value-date updates',
+      'Quick bank adjustments (fees & interest)',
+      'CA-standard BRS print/PDF with Annexures',
+    ],
+    callout:
+      'Multiple Bank Accounts & Uncleared Cheques? Reconcile to ₹0.00 Variance in Seconds.',
+  },
 ];
 
 export const SETUP_STEPS: SetupStep[] = [
@@ -276,6 +297,7 @@ export const PRICING_INCLUDED: string[] = [
   'Vendor & Purchase Management',
   'Customer-wise Custom Pricing',
   'Payment & Ledger Management',
+  'Multi-Bank Master & Smart Bank Reconciliation (BRS)',
   'GST & Ageing Reports',
   'Professional Initial Setup by Suraj Automation Team',
   'Dedicated Business Database Setup',
@@ -319,6 +341,11 @@ export const COMPARISON_ROWS: ComparisonRow[] = [
     feature: 'GST Summary',
     excel: 'Manual preparation',
     hisabSarthi: 'GST reports',
+  },
+  {
+    feature: 'Bank Reconciliation (BRS)',
+    excel: 'Manual ticking & highlights',
+    hisabSarthi: 'Smart CSV auto-match & audit-ready BRS',
   },
   {
     feature: 'Setup Assistance',
@@ -782,5 +809,172 @@ export const DEMO_GST_HSN_ROWS: DemoGstHsnRow[] = [
     sgst: 10620,
     igst: 5400,
     totalTax: 26640,
+  },
+];
+
+// --- Multi-Bank & BRS Simulator Dataset ---
+
+export interface DemoBankAccount {
+  id: string;
+  bankName: string;
+  accountType: 'Current' | 'OD / CC' | 'Savings';
+  accountMask: string;
+  ifsc: string;
+  upiVpa: string;
+  isDefault?: boolean;
+  openingBalance: number;
+  statementBalance: number;
+}
+
+export interface DemoBrsTransaction {
+  id: string;
+  bankId: string;
+  voucherDate: string;
+  party: string;
+  reference: string;
+  type: 'Inflow' | 'Outflow';
+  amount: number;
+  clearedDate: string | null;
+  csvMatchScore?: number;
+  csvMatched?: boolean;
+}
+
+export const DEMO_BANK_ACCOUNTS: DemoBankAccount[] = [
+  {
+    id: 'hdfc-current',
+    bankName: 'HDFC Bank',
+    accountType: 'Current',
+    accountMask: 'XXXX 4821',
+    ifsc: 'HDFC0001248',
+    upiVpa: 'hisabsarthi.biz@hdfcbank',
+    isDefault: true,
+    openingBalance: 425000,
+    statementBalance: 472410,
+  },
+  {
+    id: 'sbi-cc',
+    bankName: 'State Bank of India',
+    accountType: 'OD / CC',
+    accountMask: 'XXXX 9034',
+    ifsc: 'SBIN0004312',
+    upiVpa: 'surajauto.sbi@sbi',
+    openingBalance: 185000,
+    statementBalance: 162500,
+  },
+  {
+    id: 'icici-business',
+    bankName: 'ICICI Bank',
+    accountType: 'Current',
+    accountMask: 'XXXX 6170',
+    ifsc: 'ICIC0000842',
+    upiVpa: 'trading.desk@icici',
+    openingBalance: 112000,
+    statementBalance: 112000,
+  },
+];
+
+export const INITIAL_BRS_TRANSACTIONS: DemoBrsTransaction[] = [
+  {
+    id: 'BRS-101',
+    bankId: 'hdfc-current',
+    voucherDate: '14 Nov 2026',
+    party: 'Shree Ganesh Mart',
+    reference: 'UTR4319820411',
+    type: 'Inflow',
+    amount: 50610,
+    clearedDate: '14 Nov 2026',
+    csvMatchScore: 100,
+    csvMatched: true,
+  },
+  {
+    id: 'BRS-102',
+    bankId: 'hdfc-current',
+    voucherDate: '16 Nov 2026',
+    party: 'Kaveri Agro Mills (Cheque #004812)',
+    reference: 'CHQ-004812',
+    type: 'Outflow',
+    amount: 32000,
+    clearedDate: null,
+    csvMatchScore: 97,
+  },
+  {
+    id: 'BRS-103',
+    bankId: 'hdfc-current',
+    voucherDate: '17 Nov 2026',
+    party: 'Annapurna Corporate Caterers (Cheque #091244)',
+    reference: 'CHQ-091244',
+    type: 'Inflow',
+    amount: 42500,
+    clearedDate: null,
+    csvMatchScore: 95,
+  },
+  {
+    id: 'BRS-104',
+    bankId: 'hdfc-current',
+    voucherDate: '18 Nov 2026',
+    party: 'Metro Hospitality Group',
+    reference: 'NEFT2611180092',
+    type: 'Inflow',
+    amount: 18500,
+    clearedDate: null,
+    csvMatchScore: 99,
+  },
+  {
+    id: 'BRS-105',
+    bankId: 'hdfc-current',
+    voucherDate: '18 Nov 2026',
+    party: 'Noida Packaging Traders',
+    reference: 'IMPS8821041',
+    type: 'Outflow',
+    amount: 21700,
+    clearedDate: null,
+    csvMatchScore: 98,
+  },
+  {
+    id: 'BRS-201',
+    bankId: 'sbi-cc',
+    voucherDate: '15 Nov 2026',
+    party: 'Shree Laxmi Flour Mill',
+    reference: 'CHQ-771021',
+    type: 'Outflow',
+    amount: 22500,
+    clearedDate: '16 Nov 2026',
+    csvMatchScore: 100,
+    csvMatched: true,
+  },
+  {
+    id: 'BRS-202',
+    bankId: 'sbi-cc',
+    voucherDate: '17 Nov 2026',
+    party: 'Navrang Kirana Stores',
+    reference: 'CHQ-550912',
+    type: 'Inflow',
+    amount: 29500,
+    clearedDate: null,
+    csvMatchScore: 94,
+  },
+  {
+    id: 'BRS-301',
+    bankId: 'icici-business',
+    voucherDate: '12 Nov 2026',
+    party: 'Opening Transfer Verified',
+    reference: 'RTGS0091200',
+    type: 'Inflow',
+    amount: 24000,
+    clearedDate: '12 Nov 2026',
+    csvMatchScore: 100,
+    csvMatched: true,
+  },
+  {
+    id: 'BRS-302',
+    bankId: 'icici-business',
+    voucherDate: '13 Nov 2026',
+    party: 'Logistics Freight Settlement',
+    reference: 'NEFT4109823',
+    type: 'Outflow',
+    amount: 24000,
+    clearedDate: '13 Nov 2026',
+    csvMatchScore: 100,
+    csvMatched: true,
   },
 ];

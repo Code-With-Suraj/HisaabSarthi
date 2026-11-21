@@ -3,10 +3,11 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Check, Info, Eye, X, ArrowRight } from 'lucide-react';
+import { Check, Info, Eye, Layers, X, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { FEATURE_MODULES, type FeatureModule } from '@/lib/hisab-data';
-import { PRODUCT_SCREENS, type ProductScreen } from '@/lib/product-screens';
+import { PRODUCT_SCREENS } from '@/lib/product-screens';
+import { FEATURE_POSTERS } from '@/lib/feature-posters';
 import { trackEvent } from '@/lib/analytics';
 
 const FEATURE_ROUTE_MAP: Record<string, string> = {
@@ -16,21 +17,33 @@ const FEATURE_ROUTE_MAP: Record<string, string> = {
   'custom-pricing': '/features/custom-pricing',
   'payments-accounting': '/features/ageing-reports',
   'reports-gst': '/features/gst-reporting',
+  'bank-reconciliation': '/features/bank-reconciliation-multi-bank',
 };
 
 type FilterTab = 'all' | 'sales' | 'inventory' | 'purchases' | 'accounting';
 
 const FILTER_TABS: { id: FilterTab; label: string }[] = [
-  { id: 'all', label: 'All 8 Modules' },
+  { id: 'all', label: 'All 9 Modules' },
   { id: 'sales', label: 'Sales & Challans' },
   { id: 'inventory', label: 'Inventory & Pricing' },
   { id: 'purchases', label: 'Purchases & GST' },
-  { id: 'accounting', label: 'Masters & Ledgers' },
+  { id: 'accounting', label: 'Ledgers & BRS' },
 ];
+
+interface PreviewItem {
+  id: string;
+  title: string;
+  caption: string;
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  isPoster?: boolean;
+}
 
 export default function FeatureExplorer() {
   const [activeFilter, setActiveFilter] = useState<FilterTab>('all');
-  const [previewScreen, setPreviewScreen] = useState<ProductScreen | null>(null);
+  const [previewItem, setPreviewItem] = useState<PreviewItem | null>(null);
 
   const visibleModules: FeatureModule[] =
     activeFilter === 'all'
@@ -38,13 +51,13 @@ export default function FeatureExplorer() {
       : FEATURE_MODULES.filter((mod) => mod.category === activeFilter);
 
   useEffect(() => {
-    if (!previewScreen) return;
+    if (!previewItem) return;
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setPreviewScreen(null);
+      if (e.key === 'Escape') setPreviewItem(null);
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [previewScreen]);
+  }, [previewItem]);
 
   return (
     <div>
@@ -80,7 +93,7 @@ export default function FeatureExplorer() {
           <span className="font-mono-num font-semibold text-[#0F172A]">
             {visibleModules.length}
           </span>{' '}
-          of <span className="font-mono-num">8</span> core modules
+          of <span className="font-mono-num">9</span> core modules
         </p>
       </div>
 
@@ -89,6 +102,9 @@ export default function FeatureExplorer() {
         {visibleModules.map((mod) => {
           const matchingScreens = PRODUCT_SCREENS.filter(
             (s) => s.featureId === mod.id
+          );
+          const matchingPosters = FEATURE_POSTERS.filter(
+            (p) => p.featureModuleId === mod.id
           );
 
           return (
@@ -107,8 +123,8 @@ export default function FeatureExplorer() {
                     </h3>
                   </div>
 
-                  {matchingScreens.length > 0 && (
-                    <div className="flex flex-wrap items-center gap-2">
+                  {(matchingScreens.length > 0 || matchingPosters.length > 0) && (
+                    <div className="flex flex-wrap items-center gap-2.5">
                       {matchingScreens.map((screen) => (
                         <button
                           key={screen.id}
@@ -118,7 +134,16 @@ export default function FeatureExplorer() {
                               location: 'feature_explorer',
                               label: screen.id,
                             });
-                            setPreviewScreen(screen);
+                            setPreviewItem({
+                              id: screen.id,
+                              title: screen.title,
+                              caption: screen.caption,
+                              src: screen.src,
+                              alt: screen.alt,
+                              width: screen.width,
+                              height: screen.height,
+                              isPoster: false,
+                            });
                           }}
                           className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 underline decoration-emerald-700/30 underline-offset-4 transition-colors hover:text-emerald-800 hover:decoration-emerald-800 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 rounded"
                         >
@@ -127,6 +152,37 @@ export default function FeatureExplorer() {
                             {matchingScreens.length > 1
                               ? screen.shortLabel
                               : 'View Screen'}
+                          </span>
+                        </button>
+                      ))}
+
+                      {matchingPosters.slice(0, 2).map((poster) => (
+                        <button
+                          key={poster.id}
+                          type="button"
+                          onClick={() => {
+                            trackEvent('feature_screen_preview', {
+                              location: 'feature_explorer_poster',
+                              label: poster.id,
+                            });
+                            setPreviewItem({
+                              id: poster.id,
+                              title: poster.title,
+                              caption: poster.tagline,
+                              src: poster.src,
+                              alt: poster.alt,
+                              width: poster.width,
+                              height: poster.height,
+                              isPoster: true,
+                            });
+                          }}
+                          className="inline-flex items-center gap-1 text-xs font-semibold text-[#0F172A] underline decoration-slate-300 underline-offset-4 transition-colors hover:text-emerald-700 hover:decoration-emerald-700 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 rounded"
+                        >
+                          <Layers className="h-3.5 w-3.5 text-emerald-700" />
+                          <span>
+                            {matchingPosters.length > 1
+                              ? poster.shortLabel
+                              : 'Feature Card'}
                           </span>
                         </button>
                       ))}
@@ -183,9 +239,9 @@ export default function FeatureExplorer() {
         })}
       </div>
 
-      {/* Feature Screenshot Preview Modal */}
+      {/* Feature Screenshot & Poster Preview Modal */}
       <AnimatePresence>
-        {previewScreen && (
+        {previewItem && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -193,9 +249,9 @@ export default function FeatureExplorer() {
             transition={{ duration: 0.16 }}
             role="dialog"
             aria-modal="true"
-            aria-label={`${previewScreen.title} screen preview`}
-            onClick={() => setPreviewScreen(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/85 p-4 backdrop-blur-xs sm:p-6"
+            aria-label={`${previewItem.title} preview`}
+            onClick={() => setPreviewItem(null)}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/88 p-4 backdrop-blur-xs sm:p-6"
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.97 }}
@@ -208,29 +264,37 @@ export default function FeatureExplorer() {
               <div className="flex items-center justify-between gap-4 border-b border-slate-200 bg-[#FAF9F6] px-5 py-3.5">
                 <div className="min-w-0">
                   <p className="font-display text-sm font-bold text-[#0F172A] truncate">
-                    {previewScreen.title}
+                    {previewItem.title}
                   </p>
                   <p className="truncate text-xs text-slate-500">
-                    {previewScreen.caption}
+                    {previewItem.caption}
                   </p>
                 </div>
                 <button
                   type="button"
-                  onClick={() => setPreviewScreen(null)}
-                  aria-label="Close screen preview"
+                  onClick={() => setPreviewItem(null)}
+                  aria-label="Close preview"
                   className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 hover:bg-slate-100"
                 >
                   <X className="h-4 w-4" />
                 </button>
               </div>
-              <div className="flex max-h-[78vh] items-center justify-center overflow-auto bg-[#F4F2EC] p-4">
+              <div
+                className={`flex max-h-[78vh] items-center justify-center overflow-auto p-4 sm:p-5 ${
+                  previewItem.isPoster ? 'bg-[#08152E]' : 'bg-[#F4F2EC]'
+                }`}
+              >
                 <Image
-                  src={previewScreen.src}
-                  alt={previewScreen.alt}
-                  width={previewScreen.width}
-                  height={previewScreen.height}
+                  src={previewItem.src}
+                  alt={previewItem.alt}
+                  width={previewItem.width}
+                  height={previewItem.height}
                   referrerPolicy="no-referrer"
-                  className="max-h-[70vh] w-auto max-w-full rounded-lg border border-slate-200 bg-white object-contain shadow-sm"
+                  className={`max-h-[70vh] w-auto max-w-full rounded-lg object-contain shadow-sm ${
+                    previewItem.isPoster
+                      ? 'border border-slate-700/80'
+                      : 'border border-slate-200 bg-white'
+                  }`}
                 />
               </div>
             </motion.div>
@@ -240,3 +304,4 @@ export default function FeatureExplorer() {
     </div>
   );
 }
+

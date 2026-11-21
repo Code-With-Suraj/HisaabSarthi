@@ -6,12 +6,15 @@ import {
   ZoomIn,
   X,
   Play,
+  ArrowUpRight,
   CheckCircle2,
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { PRODUCT_SCREENS } from '@/lib/product-screens';
+import { LIVE_DEMO_URL } from '@/lib/whatsapp';
+import { trackEvent } from '@/lib/analytics';
 
 export default function HeroProductShowcase() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -119,11 +122,20 @@ export default function HeroProductShowcase() {
             {activeSlide.caption}
           </p>
           <a
-            href="#live-demo"
+            href={LIVE_DEMO_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() =>
+              trackEvent('demo_interaction', {
+                location: 'hero_gallery',
+                label: 'launch_live_demo_app',
+              })
+            }
             className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 hover:text-emerald-800 whitespace-nowrap shrink-0"
           >
             <Play className="h-3.5 w-3.5" />
-            <span>Try Interactive Demo</span>
+            <span>Launch Live App Demo</span>
+            <ArrowUpRight className="h-3.5 w-3.5" />
           </a>
         </div>
       </div>

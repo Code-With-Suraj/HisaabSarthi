@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Check, ArrowRight, Info, BookOpen } from 'lucide-react';
@@ -7,6 +6,7 @@ import Navbar from '@/components/Navbar';
 import SiteFooter from '@/components/SiteFooter';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import SubpageCta from '@/components/SubpageCta';
+import FeatureVisualViewer from '@/components/FeatureVisualViewer';
 import JsonLd from '@/components/JsonLd';
 import {
   FEATURE_PAGES,
@@ -14,6 +14,7 @@ import {
   getGuideBySlug,
 } from '@/lib/seo-pages-data';
 import { PRODUCT_SCREENS } from '@/lib/product-screens';
+import { getPostersByFeatureSlug } from '@/lib/feature-posters';
 import {
   buildPageMetadata,
   buildBreadcrumbSchema,
@@ -25,7 +26,9 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  return FEATURE_PAGES.map((feature) => ({ slug: feature.slug }));
+  return FEATURE_PAGES.filter(
+    (feature) => feature.slug !== 'bank-reconciliation-multi-bank'
+  ).map((feature) => ({ slug: feature.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -49,6 +52,7 @@ export default async function FeatureDetailPage({ params }: PageProps) {
   if (!feature) notFound();
 
   const screen = PRODUCT_SCREENS.find((s) => s.id === feature.screenId);
+  const posters = getPostersByFeatureSlug(feature.slug);
   const relatedFeatures = feature.relatedSlugs
     .map((s) => getFeaturePageBySlug(s))
     .filter((item): item is NonNullable<typeof item> => Boolean(item));
@@ -89,25 +93,8 @@ export default async function FeatureDetailPage({ params }: PageProps) {
             </p>
           </header>
 
-          {/* Actual Software Screenshot */}
-          {screen && (
-            <figure className="mt-8 overflow-hidden rounded-2xl border border-slate-200 bg-white p-3 sm:p-4">
-              <div className="flex items-center justify-center rounded-xl border border-slate-200 bg-[#F4F2EC] p-3">
-                <Image
-                  src={screen.src}
-                  alt={screen.alt}
-                  width={screen.width}
-                  height={screen.height}
-                  priority
-                  referrerPolicy="no-referrer"
-                  className="max-h-[480px] h-auto w-auto max-w-full rounded-lg border border-slate-200 bg-white object-contain"
-                />
-              </div>
-              <figcaption className="mt-3 px-1 text-xs text-slate-500">
-                Actual HisabSarthi workspace screen: {screen.caption}
-              </figcaption>
-            </figure>
-          )}
+          {/* Actual Software Screenshot & Feature Blueprint Switcher */}
+          <FeatureVisualViewer screen={screen} posters={posters} />
 
           {/* Capabilities Grid */}
           <section className="mt-12">

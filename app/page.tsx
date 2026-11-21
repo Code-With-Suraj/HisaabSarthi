@@ -15,6 +15,7 @@ import {
 import Navbar from '@/components/Navbar';
 import HeroProductShowcase from '@/components/HeroProductShowcase';
 import FeatureExplorer from '@/components/FeatureExplorer';
+import VisualProductCatalog from '@/components/VisualProductCatalog';
 import DashboardSimulator from '@/components/DashboardSimulator';
 import PricingWhatsAppBox from '@/components/PricingWhatsAppBox';
 import FaqAccordion from '@/components/FaqAccordion';
@@ -36,7 +37,12 @@ import {
   buildSoftwareApplicationSchema,
   buildFaqSchema,
 } from '@/lib/seo';
-import { WHATSAPP_CONFIG, buildCallUrl, buildWhatsAppUrl } from '@/lib/whatsapp';
+import {
+  LIVE_DEMO_URL,
+  WHATSAPP_CONFIG,
+  buildCallUrl,
+  buildWhatsAppUrl,
+} from '@/lib/whatsapp';
 import distributorOfficeImg from '@/src/assets/images/indian_distributor_office_1795002294469.jpg';
 import teamOnboardingImg from '@/src/assets/images/team_onboarding_setup_1795002294768.jpg';
 
@@ -136,14 +142,17 @@ export default function HomePage() {
 
                   <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
                     <TrackedLink
-                      href="#live-demo"
+                      href={LIVE_DEMO_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       eventName="demo_interaction"
                       eventLocation="hero"
                       eventLabel="hero_watch_live_demo"
                       className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-xs font-semibold text-[#0F172A] transition-colors duration-150 hover:border-slate-400 hover:bg-slate-50 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
                     >
                       <Play className="h-3.5 w-3.5 shrink-0 text-emerald-700" />
-                      <span>Watch Live Demo</span>
+                      <span>Open Live Demo</span>
+                      <ArrowUpRight className="h-3.5 w-3.5 shrink-0 text-slate-400" />
                     </TrackedLink>
 
                     <TrackedLink
@@ -270,7 +279,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* SECTION 4 – FEATURES (01–08) */}
+        {/* SECTION 4 – FEATURES (01–09) */}
         <section id="features" className="border-b border-slate-200/80 bg-white py-16 sm:py-20">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="mb-10 max-w-2xl">
@@ -286,10 +295,37 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* SECTION 4.5 – VISUAL PRODUCT BLUEPRINTS (12-MODULE MODERN SHOWCASE) */}
+        <section
+          id="visual-tour"
+          className="border-b border-slate-800 bg-[#0B1528] py-16 text-white sm:py-20"
+        >
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-10 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+              <div className="max-w-2xl">
+                <p className="text-xs font-semibold tracking-wide text-emerald-400">
+                  Visual Module Gallery · 12 Core Capabilities
+                </p>
+                <h2 className="mt-2 font-display text-2xl font-bold tracking-tight text-white sm:text-3xl [text-wrap:balance]">
+                  See Every HisabSarthi Module Up Close.
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-slate-300 sm:text-base">
+                  Explore all 12 modules—from GST Sales Invoicing, Delivery Challans and Multi-Bank BRS to Ageing Analysis, Party Ledgers, Custom Pricing and Dual Print Formats.
+                </p>
+              </div>
+              <p className="text-xs font-medium text-slate-400 lg:text-right">
+                Filter by workflow or click any blueprint for full-resolution inspection.
+              </p>
+            </div>
+
+            <VisualProductCatalog />
+          </div>
+        </section>
+
         {/* SECTION 5 – INTERACTIVE DASHBOARD & LIVE DEMO SIMULATOR */}
         <section id="live-demo" className="border-b border-slate-200/80 bg-[#FAF9F6] py-16 sm:py-20">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <div className="mb-10 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <div className="mb-10 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
               <div className="max-w-2xl">
                 <p className="text-xs font-semibold tracking-wide text-emerald-700">
                   Interactive Live Demo
@@ -298,12 +334,27 @@ export default function HomePage() {
                   Your Entire Business at a Glance.
                 </h2>
                 <p className="mt-3 text-base text-slate-600">
-                  No need to open multiple Excel files to understand your business. The HisabSarthi Dashboard gives you a consolidated view of important business information.
+                  No need to open multiple Excel files to understand your business. Preview the workspace below or launch the actual running HisabSarthi web application in one click.
                 </p>
               </div>
-              <p className="text-sm font-semibold text-[#0F172A]">
-                Make business decisions with organized information instead of assumptions.
-              </p>
+              <div className="flex flex-col items-start gap-2 lg:items-end">
+                <TrackedLink
+                  href={LIVE_DEMO_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  eventName="demo_interaction"
+                  eventLocation="live_demo_section"
+                  eventLabel="launch_full_live_app"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#0F172A] px-5 py-3 text-xs font-bold text-white transition-colors hover:bg-slate-800 whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
+                >
+                  <Play className="h-3.5 w-3.5 text-emerald-400" />
+                  <span>Launch Full Live App</span>
+                  <ArrowUpRight className="h-4 w-4 text-slate-300" />
+                </TrackedLink>
+                <p className="text-xs text-slate-500">
+                  Opens the live HisabSarthi Google Web App in a new tab
+                </p>
+              </div>
             </div>
 
             <DashboardSimulator />

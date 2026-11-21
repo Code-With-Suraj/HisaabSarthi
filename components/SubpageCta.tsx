@@ -1,7 +1,11 @@
-import Link from 'next/link';
 import { ArrowUpRight, MessageCircle, Phone, Play } from 'lucide-react';
 import TrackedLink from '@/components/TrackedLink';
-import { WHATSAPP_CONFIG, buildCallUrl, buildWhatsAppUrl } from '@/lib/whatsapp';
+import {
+  LIVE_DEMO_URL,
+  WHATSAPP_CONFIG,
+  buildCallUrl,
+  buildWhatsAppUrl,
+} from '@/lib/whatsapp';
 
 interface SubpageCtaProps {
   contextLabel: string;
@@ -59,13 +63,19 @@ export default function SubpageCta({
               <span className="font-mono-num">{WHATSAPP_CONFIG.displayPhone}</span>
             </TrackedLink>
 
-            <Link
-              href="/#live-demo"
+            <TrackedLink
+              href={LIVE_DEMO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              eventName="demo_interaction"
+              eventLocation={contextLabel}
+              eventLabel="subpage_open_live_demo"
               className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-slate-700 bg-slate-900/70 px-4 py-2.5 text-xs font-semibold text-slate-200 transition-colors hover:border-slate-500 hover:text-white whitespace-nowrap"
             >
               <Play className="h-3.5 w-3.5 text-emerald-400" />
-              <span>Try Live Demo</span>
-            </Link>
+              <span>Open Live Demo</span>
+              <ArrowUpRight className="h-3.5 w-3.5 text-slate-400" />
+            </TrackedLink>
           </div>
         </div>
       </div>

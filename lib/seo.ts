@@ -185,6 +185,7 @@ export function buildSoftwareApplicationSchema() {
       'Vendor Bills and Purchase Management',
       'Customer and Site-Wise Custom Product Pricing',
       'Customer Receipts, Vendor Payments, and Party-Wise Ledgers',
+      'Multi-Bank Account Management and Smart Bank Reconciliation (BRS) with CSV Auto-Matching',
       'Outstanding Receivables Ageing Reports',
       'GST Sales, Purchase, and HSN/SAC Summary Reports for Accounting Review',
       'Dedicated Google Sheets Database in Customer Google Drive',
