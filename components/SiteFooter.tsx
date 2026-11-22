@@ -37,7 +37,7 @@ export default function SiteFooter() {
               </span>
             </Link>
             <p className="mt-3 text-xs leading-relaxed text-slate-400">
-              Smart accounting, inventory, delivery challan, ageing, and GST summary reporting software built on Google Sheets and Google Apps Script by{' '}
+              Practical accounting, invoicing, challan, inventory, multi-bank BRS &amp; GST summary software built specifically for Indian SMBs who don&apos;t want to pay for bloated unused features in heavy apps like Tally, Busy or Vyapar. Powered by Google Sheets &amp;{' '}
               <span className="font-medium text-slate-200">Suraj Automation</span>.
             </p>
             <div className="mt-4 flex flex-col gap-2 text-xs">

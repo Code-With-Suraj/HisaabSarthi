@@ -17,6 +17,7 @@ import HeroProductShowcase from '@/components/HeroProductShowcase';
 import FeatureExplorer from '@/components/FeatureExplorer';
 import VisualProductCatalog from '@/components/VisualProductCatalog';
 import DashboardSimulator from '@/components/DashboardSimulator';
+import IndianTestimonials from '@/components/IndianTestimonials';
 import PricingWhatsAppBox from '@/components/PricingWhatsAppBox';
 import FaqAccordion from '@/components/FaqAccordion';
 import ResilientImage from '@/components/ResilientImage';
@@ -73,41 +74,45 @@ export default function HomePage() {
 
               {/* Right 5 Columns: Contiguous E-Commerce Purchase Module */}
               <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-7 lg:col-span-5">
-                <p className="text-xs font-medium text-slate-500">
-                  HisabSarthi by Suraj Automation · Lifetime Software License
+                <p className="text-xs font-semibold text-emerald-700">
+                  New Year Limited-Time Offer · HisabSarthi by Suraj Automation
                 </p>
 
                 <h1 className="mt-2.5 font-display text-[clamp(1.75rem,2.6vw,2.35rem)] font-bold leading-[1.16] tracking-tight text-[#0F172A] [text-wrap:balance]">
-                  Your Business Is Growing. Is Your Accounting Keeping Up?
+                  Smart SMB Accounting. Pay Only for Features You Actually Use.
                 </h1>
 
                 <p className="mt-3 text-sm leading-relaxed text-slate-600">
-                  Stop managing your business through scattered Excel files, manual registers and complicated accounting processes.
+                  Built for Indian small &amp; medium businesses that don&apos;t want to pay recurring fees for bloated, unnecessary menus in heavy software like{' '}
+                  <strong className="font-semibold text-[#0F172A]">
+                    Tally, Busy or Vyapar
+                  </strong>
+                  —or struggle with scattered Excel files.
                 </p>
 
                 <p className="mt-2.5 text-sm leading-relaxed text-slate-700">
                   Meet{' '}
                   <strong className="font-semibold text-[#0F172A]">
-                    HisabSarthi – Smart Accounting &amp; Inventory Management Software for Growing Businesses.
-                  </strong>{' '}
-                  Manage your Sales, Purchases, Payments, Inventory, GST Reports, Outstanding Receivables and Business Accounts from one simple application.
+                    HisabSarthi
+                  </strong>
+                  : only the practical daily tools your SMB needs—Sales Invoices, Delivery Challans, Purchases, Inventory, Custom Pricing, Party Ledgers, Multi-Bank BRS &amp; GST Reports in one clean app.
                 </p>
 
-                {/* Contiguous Price & Savings Block */}
+                {/* Contiguous New Year Price & Savings Block */}
                 <div className="mt-5 border-y border-slate-200 py-4">
                   <div className="flex flex-wrap items-baseline gap-2.5">
                     <span className="font-mono-num text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
                       ₹4,999
                     </span>
                     <span className="font-mono-num text-base text-slate-400 line-through">
-                      ₹15,000
+                      ₹9,999
                     </span>
                     <span className="text-xs font-semibold text-emerald-700">
-                      Save 67% · ONLY – Lifetime Access
+                      New Year Offer · 50% OFF Lifetime
                     </span>
                   </div>
                   <p className="mt-1.5 text-xs text-slate-600">
-                    One-Time Payment · No Monthly Subscription · Free Professional Setup
+                    Limited-Time One-Time Payment · Regular plans after New Year: ₹449/mo to ₹9,999 Lifetime · Free Setup
                   </p>
                 </div>
 
@@ -210,13 +215,13 @@ export default function HomePage() {
               <div className="flex flex-col justify-between rounded-xl border border-slate-200 bg-[#0F172A] p-6 text-white">
                 <div>
                   <h3 className="font-display text-xl font-bold tracking-tight">
-                    Your Business Needs One Connected System.
+                    Your SMB Needs Only the Features You Use—Not Software Bloat.
                   </h3>
                   <div className="mt-4 space-y-1.5 text-sm text-slate-300">
-                    <p>Not another Excel file.</p>
-                    <p>Not another complicated software.</p>
+                    <p>Not scattered Excel files.</p>
+                    <p>Not paying yearly in Tally, Busy or Vyapar for 100+ unused features.</p>
                     <p className="font-semibold text-emerald-400">
-                      Just one practical solution.
+                      Just the exact accounting &amp; stock tools your small business needs daily.
                     </p>
                   </div>
                 </div>
@@ -240,19 +245,19 @@ export default function HomePage() {
             <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-start">
               <div className="lg:col-span-5">
                 <p className="text-xs font-semibold tracking-wide text-emerald-700">
-                  Introducing HisabSarthi
+                  Built Exclusively for Practical Indian SMBs
                 </p>
                 <h2 className="mt-2 font-display text-2xl font-bold tracking-tight text-[#0F172A] sm:text-3xl [text-wrap:balance]">
-                  One Software. Complete Business Accounting. Better Control.
+                  Zero Bloated Menus. Only What Your Small Business Needs.
                 </h2>
                 <p className="mt-4 text-base leading-relaxed text-slate-600">
-                  HisabSarthi is a smart accounting and inventory management application designed to simplify everyday business operations.
+                  Heavy accounting tools like Tally, Busy and Vyapar pack hundreds of complex screens designed for large enterprises and CA firms—yet most SMBs use barely 15% of them while paying recurring renewals every year.
                 </p>
                 <p className="mt-3 text-base leading-relaxed text-slate-600">
-                  From creating sales invoices to managing inventory, tracking payments and generating reports, manage your business operations from one place.
+                  HisabSarthi gives you only the focused workflows you actually use daily: billing, delivery challans, stock tracking, custom party rates, ledgers, multi-bank BRS and GST summaries.
                 </p>
-                <p className="mt-3 text-sm font-medium text-[#0F172A]">
-                  Built for practical business requirements, not unnecessary enterprise-level complexity.
+                <p className="mt-3 text-sm font-semibold text-[#0F172A]">
+                  Simple enough for any shop staff. Powerful enough for your CA.
                 </p>
               </div>
 
@@ -550,18 +555,40 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* SECTION 9 – PRICING */}
-        <section id="pricing" className="border-b border-slate-200/80 bg-[#FAF9F6] py-16 sm:py-20">
+        {/* SECTION 8.5 – DELHI NCR & NOIDA SMALL BUSINESS TESTIMONIALS */}
+        <section
+          id="testimonials"
+          className="border-b border-slate-200/80 bg-[#F4F2EC]/70 py-16 sm:py-20"
+        >
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="mb-10 max-w-2xl">
               <p className="text-xs font-semibold tracking-wide text-emerald-700">
-                Simple Lifetime Pricing
+                Trusted by Small Businesses Across Delhi NCR &amp; Noida
               </p>
               <h2 className="mt-2 font-display text-2xl font-bold tracking-tight text-[#0F172A] sm:text-3xl [text-wrap:balance]">
-                Stop Paying Monthly for Basic Business Accounting.
+                What Local Shop Owners, Traders &amp; Suppliers Say About HisabSarthi.
               </h2>
               <p className="mt-3 text-base text-slate-600">
-                Why keep paying recurring software charges when you can get lifetime access to HisabSarthi?
+                From Noida Sector 63, Sector 18 and Greater Noida West to Laxmi Nagar, Okhla and Indirapuram—small business owners who moved from messy bill books and Excel sheets to one organized system.
+              </p>
+            </div>
+
+            <IndianTestimonials />
+          </div>
+        </section>
+
+        {/* SECTION 9 – PRICING (NEW YEAR OFFER + POST-NEW-YEAR SCHEDULE) */}
+        <section id="pricing" className="border-b border-slate-200/80 bg-[#FAF9F6] py-16 sm:py-20">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-10 max-w-3xl">
+              <p className="text-xs font-semibold tracking-wide text-emerald-700">
+                New Year Limited-Time Offer · Save ₹5,000 on Lifetime
+              </p>
+              <h2 className="mt-2 font-display text-2xl font-bold tracking-tight text-[#0F172A] sm:text-3xl [text-wrap:balance]">
+                Lock In Lifetime Access at ₹4,999 Before New Year Offer Ends.
+              </h2>
+              <p className="mt-3 text-base text-slate-600">
+                Grab lifetime access with free professional setup for ₹4,999 one-time today. After the New Year offer closes, standard plans apply—starting from ₹449/month, ₹2,199 semi-yearly, ₹2,999/year, and ₹9,999 for Lifetime.
               </p>
             </div>
 
@@ -573,39 +600,48 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* SECTION 10 – COMPARISON */}
+        {/* SECTION 10 – 3-WAY SMB COMPARISON */}
         <section className="border-b border-slate-200/80 bg-white py-16 sm:py-20">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <div className="mb-8 max-w-2xl">
+            <div className="mb-8 max-w-3xl">
               <p className="text-xs font-semibold tracking-wide text-emerald-700">
-                Side-by-Side Comparison
+                Honest 3-Way SMB Comparison
               </p>
-              <h2 className="mt-2 font-display text-2xl font-bold tracking-tight text-[#0F172A] sm:text-3xl">
-                Why Choose HisabSarthi?
+              <h2 className="mt-2 font-display text-2xl font-bold tracking-tight text-[#0F172A] sm:text-3xl [text-wrap:balance]">
+                Why Small Businesses Switch from Excel &amp; Heavy Apps Like Tally, Busy or Vyapar
               </h2>
+              <p className="mt-2.5 text-sm leading-relaxed text-slate-600 sm:text-base">
+                Don&apos;t pay recurring annual fees for complex modules you never open. Compare what your SMB actually gets every day.
+              </p>
             </div>
 
             <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white">
-              <table className="w-full text-left text-sm">
+              <table className="w-full min-w-[680px] text-left text-sm">
                 <thead className="border-b border-slate-200 bg-[#FAF9F6] text-xs uppercase tracking-wider text-slate-500">
                   <tr>
-                    <th className="px-6 py-4 font-semibold">Feature</th>
-                    <th className="px-6 py-4 font-semibold">Manual Excel</th>
-                    <th className="px-6 py-4 font-semibold text-emerald-800">
-                      HisabSarthi
+                    <th className="px-5 py-4 font-semibold">Feature</th>
+                    <th className="px-5 py-4 font-semibold">Manual Excel</th>
+                    <th className="px-5 py-4 font-semibold text-slate-700">
+                      Heavy Apps (Tally, Busy, Vyapar)
+                    </th>
+                    <th className="bg-emerald-50/70 px-5 py-4 font-semibold text-emerald-900">
+                      HisabSarthi (Built for SMBs)
                     </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-200">
                   {COMPARISON_ROWS.map((row) => (
                     <tr key={row.feature} className="hover:bg-slate-50/70">
-                      <td className="px-6 py-4 font-semibold text-[#0F172A]">
+                      <td className="px-5 py-4 font-semibold text-[#0F172A]">
                         {row.feature}
                       </td>
-                      <td className="px-6 py-4 text-slate-500">{row.excel}</td>
-                      <td className="px-6 py-4 font-medium text-emerald-800">
-                        <span className="inline-flex items-center gap-2">
-                          <Check className="h-4 w-4 shrink-0 text-emerald-600" />
+                      <td className="px-5 py-4 text-slate-500">{row.excel}</td>
+                      <td className="px-5 py-4 text-slate-600">
+                        {row.heavyApps}
+                      </td>
+                      <td className="bg-emerald-50/35 px-5 py-4 font-medium text-emerald-900">
+                        <span className="inline-flex items-start gap-2">
+                          <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
                           <span>{row.hisabSarthi}</span>
                         </span>
                       </td>
@@ -614,6 +650,10 @@ export default function HomePage() {
                 </tbody>
               </table>
             </div>
+
+            <p className="mt-4 text-xs leading-relaxed text-slate-500">
+              Note: Tally, Busy and Vyapar are registered trademarks of their respective owners and remain good choices for large or CA-heavy organizations needing advanced enterprise modules. HisabSarthi is purpose-built for Indian SMBs who want streamlined daily operations without paying for unused bloat.
+            </p>
           </div>
         </section>
 
@@ -694,15 +734,14 @@ export default function HomePage() {
         <section className="bg-[#0F172A] py-16 text-white sm:py-20">
           <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
             <h2 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl [text-wrap:balance]">
-              Your Business Deserves Smarter Accounting.
+              Stop Paying for Unused Software Features. Switch to Practical SMB Accounting.
             </h2>
 
             <div className="mx-auto mt-5 max-w-xl space-y-2 text-base text-slate-300">
-              <p>Stop wasting time managing scattered records.</p>
-              <p>Stop struggling with manual stock updates.</p>
-              <p>Stop spending unnecessary hours preparing business reports.</p>
+              <p>No bloated enterprise menus like Tally, Busy or Vyapar that your team never opens.</p>
+              <p>No scattered Excel files or manual stock mismatches.</p>
               <p className="pt-2 text-slate-200">
-                Bring your accounting, inventory and daily business operations together with HisabSarthi.
+                Get only the exact billing, challan, stock, ledger, BRS and GST tools your small business actually uses every day.
               </p>
             </div>
 
@@ -711,12 +750,15 @@ export default function HomePage() {
             </p>
 
             <div className="mt-8 rounded-2xl border border-slate-800 bg-slate-900/70 px-6 py-8 sm:px-10">
-              <p className="font-display text-2xl font-bold text-white sm:text-3xl">
-                Get HisabSarthi for Just{' '}
+              <p className="text-xs font-semibold tracking-wide text-emerald-400 uppercase">
+                New Year Limited-Time Offer · Regular Lifetime ₹9,999 After New Year
+              </p>
+              <p className="mt-2 font-display text-2xl font-bold text-white sm:text-3xl">
+                Get HisabSarthi Lifetime for Just{' '}
                 <span className="font-mono-num text-emerald-400">₹4,999</span>.
               </p>
               <p className="mt-2 text-sm text-slate-300">
-                Lifetime Access. Professional Setup Included.
+                One-Time Payment · Lifetime Access · Free Professional Setup Included.
               </p>
 
               <div className="mt-7 flex flex-wrap items-center justify-center gap-4">

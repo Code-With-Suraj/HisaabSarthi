@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     template: '%s',
   },
   description:
-    'Manage sales invoices, delivery challans, inventory, custom pricing, party ledgers, ageing & GST reports in Google Sheets. ₹4,999 lifetime access.',
+    'Built for Indian SMBs who do not want to pay for unused features in Tally, Busy or Vyapar. Get only essential invoicing, challans, stock, BRS & GST reports in Google Sheets. ₹4,999 New Year lifetime offer.',
   applicationName: SITE_CONFIG.brandName,
   authors: [{ name: SITE_CONFIG.parentCompany, url: getSiteUrl() }],
   creator: SITE_CONFIG.parentCompany,
@@ -79,9 +79,9 @@ export const metadata: Metadata = {
     locale: 'en_IN',
     url: getSiteUrl(),
     siteName: SITE_CONFIG.brandName,
-    title: 'HisabSarthi — Smart Accounting & Inventory Software',
+    title: 'HisabSarthi — Practical SMB Accounting & Inventory Software',
     description:
-      'Google Sheets-powered accounting, delivery challans, consolidated invoicing, inventory & GST summaries for ₹4,999 one-time with free team setup.',
+      'Skip bloated renewals in Tally, Busy or Vyapar. Get only the invoicing, challans, inventory, multi-bank BRS & GST reports your SMB actually needs—₹4,999 New Year lifetime offer.',
     images: [
       {
         url: SITE_CONFIG.ogImagePath,
@@ -93,9 +93,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'HisabSarthi — Smart Accounting & Inventory Software',
+    title: 'HisabSarthi — Practical SMB Accounting & Inventory Software',
     description:
-      'Smart accounting, delivery challans, inventory & GST summaries in your own Google Drive. ₹4,999 lifetime access with free setup.',
+      'Built for Indian SMBs: pay only for the accounting & inventory features you actually use. ₹4,999 New Year lifetime offer with free setup.',
     images: [SITE_CONFIG.ogImagePath],
   },
 };

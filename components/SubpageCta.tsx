@@ -15,8 +15,8 @@ interface SubpageCtaProps {
 
 export default function SubpageCta({
   contextLabel,
-  heading = 'Get HisabSarthi for ₹4,999 — Lifetime Access & Free Setup',
-  subcopy = 'One-time payment. No monthly subscription. Suraj Automation Team sets up your dedicated Google Sheets database and guides your onboarding.',
+  heading = 'New Year Offer: Get HisabSarthi Lifetime for ₹4,999 — Built for Practical SMBs',
+  subcopy = 'Stop paying recurring fees for bloated features in Tally, Busy or Vyapar you never use. Lock in ₹4,999 one-time lifetime access (₹9,999 after New Year) with free setup on your own Google Drive.',
 }: SubpageCtaProps) {
   const buyNowUrl = buildWhatsAppUrl('buy-setup');
   const callUrl = buildCallUrl();

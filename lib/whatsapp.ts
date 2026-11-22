@@ -9,7 +9,7 @@ export const WHATSAPP_CONFIG = {
   telHref: 'tel:+919355337839',
   teamName: 'Suraj Automation Team',
   productName: 'HisabSarthi',
-  priceLabel: '₹4,999 (Lifetime Access)',
+  priceLabel: '₹4,999 New Year Offer (Lifetime Access)',
 };
 
 export function buildCallUrl(): string {
@@ -41,10 +41,10 @@ export function buildWhatsAppMessage(
       : '';
 
   if (intent === 'team-chat') {
-    return `Hello Suraj Automation Team, I would like more information about HisabSarthi (₹4,999 Lifetime Access) and how the setup works for my business.${customBlock}`;
+    return `Hello Suraj Automation Team, I would like more information about HisabSarthi (₹4,999 New Year Lifetime Offer) and how the setup works for my business.${customBlock}`;
   }
 
-  return `Hello Suraj Automation Team, I want to get HisabSarthi (₹4,999 One-Time Lifetime Access) and confirm my free professional software setup. Please share the payment and onboarding steps.${customBlock}`;
+  return `Hello Suraj Automation Team, I want to claim the HisabSarthi New Year Offer (₹4,999 One-Time Lifetime Access instead of ₹9,999) and confirm my free professional software setup. Please share the payment and onboarding steps.${customBlock}`;
 }
 
 export function buildWhatsAppUrl(

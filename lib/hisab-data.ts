@@ -24,6 +24,7 @@ export interface SetupStep {
 export interface ComparisonRow {
   feature: string;
   excel: string;
+  heavyApps: string;
   hisabSarthi: string;
 }
 
@@ -306,51 +307,65 @@ export const PRICING_INCLUDED: string[] = [
 ];
 
 export const COMPARISON_ROWS: ComparisonRow[] = [
-  { feature: 'Sales Invoices', excel: 'Manual', hisabSarthi: 'Organized' },
   {
-    feature: 'Delivery Challans',
-    excel: 'Separate tracking',
-    hisabSarthi: 'Integrated',
+    feature: 'Built For',
+    excel: 'Manual personal tracking',
+    heavyApps: 'Complex / CA-heavy setups with 100+ unused menus',
+    hisabSarthi: 'Practical Indian SMBs — only features you actually use',
   },
   {
-    feature: 'Consolidated Invoices',
-    excel: 'Manual work',
-    hisabSarthi: 'Built-in',
+    feature: 'Pricing & Renewals',
+    excel: 'Free but high time cost',
+    heavyApps: 'Yearly AMC, multi-user upgrades & add-on fees',
+    hisabSarthi: '₹4,999 New Year one-time lifetime (₹9,999 after offer)',
   },
   {
-    feature: 'Inventory Tracking',
-    excel: 'Manual updates',
-    hisabSarthi: 'Stock management',
+    feature: 'Sales Invoices & Dual Print',
+    excel: 'Manual formatting',
+    heavyApps: 'Complex voucher entry & template tweaks',
+    hisabSarthi: 'Fast GST / Bill of Supply + Print A & B ready',
   },
   {
-    feature: 'Custom Pricing',
-    excel: 'Separate records',
-    hisabSarthi: 'Centralized',
+    feature: 'Delivery Challans → Consolidated Bill',
+    excel: 'Separate manual sheets',
+    heavyApps: 'Multi-step configuration or extra customization',
+    hisabSarthi: 'Built-in 1-click multi-challan consolidation',
   },
   {
-    feature: 'Customer Ledger',
+    feature: 'Client & Site-Wise Custom Pricing',
+    excel: 'Scattered rate lists',
+    heavyApps: 'Rigid price levels hard for shop staff to maintain',
+    hisabSarthi: 'Simple client + delivery-site active rate cards',
+  },
+  {
+    feature: 'Inventory & Low-Stock Alerts',
+    excel: 'Manual stock deductions',
+    heavyApps: 'Overloaded godown/batch screens',
+    hisabSarthi: 'Clean live stock, valuation & low-stock alerts',
+  },
+  {
+    feature: 'Party Ledgers & Ageing Report',
     excel: 'Manual reconciliation',
-    hisabSarthi: 'Generated reports',
+    heavyApps: 'Requires trained operator to pull reports',
+    hisabSarthi: '1-click party ledgers & 30/60/90-day ageing',
   },
   {
-    feature: 'Ageing Analysis',
-    excel: 'Manual calculation',
-    hisabSarthi: 'Automated report',
-  },
-  {
-    feature: 'GST Summary',
-    excel: 'Manual preparation',
-    hisabSarthi: 'GST reports',
-  },
-  {
-    feature: 'Bank Reconciliation (BRS)',
+    feature: 'Multi-Bank & Smart BRS',
     excel: 'Manual ticking & highlights',
-    hisabSarthi: 'Smart CSV auto-match & audit-ready BRS',
+    heavyApps: 'Manual date-by-date voucher entry',
+    hisabSarthi: 'CSV auto-match & audit-ready BRS printouts',
   },
   {
-    feature: 'Setup Assistance',
+    feature: 'Data Ownership & Device Access',
+    excel: 'Scattered local files',
+    heavyApps: 'Locked to desktop/proprietary vendor cloud',
+    hisabSarthi: 'Browser-based + stored in your own Google Drive',
+  },
+  {
+    feature: 'Setup & Staff Onboarding',
     excel: 'Self-managed',
-    hisabSarthi: 'Our team handles initial setup',
+    heavyApps: 'Self-setup or paid local partner visit',
+    hisabSarthi: 'Free initial setup by Suraj Automation Team',
   },
 ];
 
@@ -383,35 +398,41 @@ export const FAQ_ITEMS: FaqItem[] = [
     id: 'faq-5',
     question: 'Q5. Is there any monthly or yearly subscription?',
     answer:
-      'No. The advertised plan is ₹4,999 as a one-time payment for lifetime software access.',
+      'During the limited-time New Year Offer, you get Lifetime Access for a one-time payment of ₹4,999 with zero recurring fees. After the New Year offer ends, standard plans will apply (14-Day Free Trial ₹0, Monthly ₹449, Semi-Yearly ₹2,199, Yearly ₹2,999, and Lifetime ₹9,999 one-time).',
   },
   {
     id: 'faq-6',
-    question: 'Q6. Can I manage inventory and accounting together?',
+    question: 'Q6. Why choose HisabSarthi instead of heavy software like Tally, Busy or Vyapar?',
     answer:
-      'Yes. HisabSarthi includes sales, purchase, inventory, payment, ledger and reporting modules.',
+      'Tally, Busy and Vyapar are strong tools for large or CA-heavy setups, but most small and medium businesses end up paying recurring renewal fees for dozens of complex menus they never use. HisabSarthi is built exclusively for practical Indian SMBs who only want the exact daily workflows they need—fast invoicing, challans, custom rates, stock, party ledgers, ageing, GST summaries and BRS—without bloat.',
   },
   {
     id: 'faq-7',
-    question: 'Q7. Can I generate one invoice from multiple delivery challans?',
+    question: 'Q7. Can I manage inventory and accounting together?',
     answer:
-      'Yes. You can select eligible delivery challans and generate a consolidated invoice.',
+      'Yes. HisabSarthi includes sales, purchase, inventory, payment, ledger, multi-bank BRS and reporting modules in one clean browser workspace.',
   },
   {
     id: 'faq-8',
-    question: 'Q8. Can I manage different prices for different customers?',
+    question: 'Q8. Can I generate one invoice from multiple delivery challans?',
+    answer:
+      'Yes. You can select eligible delivery challans by client, site and date range and generate a consolidated invoice in one click.',
+  },
+  {
+    id: 'faq-9',
+    question: 'Q9. Can I manage different prices for different customers?',
     answer:
       'Yes. Custom pricing supports customer-wise and site-wise product rates with effective dates.',
   },
   {
-    id: 'faq-9',
-    question: 'Q9. Will my software stop working if my Google account is disconnected?',
+    id: 'faq-10',
+    question: 'Q10. Will my software stop working if my Google account is disconnected?',
     answer:
       'The application requires authorized Google access. If authorization is revoked or access is unavailable, some or all functions may stop until access is restored.',
   },
   {
-    id: 'faq-10',
-    question: 'Q10. Does HisabSarthi automatically file GST returns?',
+    id: 'faq-11',
+    question: 'Q11. Does HisabSarthi automatically file GST returns?',
     answer:
       'No. It generates accounting and GST summary reports for review and reconciliation. GST filing is not an included automatic filing feature.',
   },
